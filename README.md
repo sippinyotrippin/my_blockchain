@@ -1,1 +1,3 @@
 # my_blockchain
+# LEARNING BLOCKCHAINS CREATING 
+# MY OWN
