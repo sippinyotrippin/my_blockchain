@@ -2,9 +2,10 @@ class Blockchain:
 
     def __init__(self):
         self.chain = []
+        self.pending_transactions = []
 
     def new_block(self):
-    # Generates new block and adds to the chain
+    # Generates new block and adds to the chain (self.chain = [])
         pass
 
     @staticmethod
@@ -13,5 +14,12 @@ class Blockchain:
         pass
 
     def last_block(self):
-    # Получает последний блок в проходе цепочки
+    # Returns last block of the chain
         pass
+
+    def new_transaction(self, sender, recipient, amount):
+        self.pending_transactions.append({
+            'sender': sender,
+            'recipient': recipient,
+            'amount': amount
+        })
