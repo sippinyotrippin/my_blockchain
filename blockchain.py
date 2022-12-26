@@ -6,7 +6,13 @@ class Blockchain:
 
     def new_block(self):
     # Generates new block and adds to the chain (self.chain = [])
-        pass
+        block = {
+            'index': None,
+            'timestamp': None,
+            'transactions': None,
+            'previous_hash': None
+        }
+        block['hash'] = self.hash(block) # hash method determines this block's hash and adds it to 'block'
 
     @staticmethod
     def hash(block):
@@ -15,7 +21,7 @@ class Blockchain:
 
     def last_block(self):
     # Returns last block of the chain
-        pass
+       pass
 
     def new_transaction(self, sender, recipient, amount):
         self.pending_transactions.append({
