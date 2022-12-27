@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Blockchain:
 
     def __init__(self):
@@ -8,7 +11,7 @@ class Blockchain:
     # Generates new block and adds to the chain (self.chain = [])
         block = {
             'index': len(self.chain),
-            'timestamp': None,
+            'timestamp': datetime.utcnow().isoformat(),
             'transactions': None,
             'previous_hash': None
         }
