@@ -16,7 +16,8 @@ class Blockchain:
             'previous_hash': previous_hash
         }
         block['hash'] = self.hash(block) # hash method determines this block's hash and adds it to 'block'
-
+        self.pending_transactions = [] # purge (clean out) pending (незавершенные) transactions
+        self.chain.append(block) # adds just generated block to the chain
     @staticmethod
     def hash(block):
     # Hashes a block
