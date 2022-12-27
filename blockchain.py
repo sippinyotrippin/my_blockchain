@@ -7,7 +7,7 @@ class Blockchain:
     def new_block(self):
     # Generates new block and adds to the chain (self.chain = [])
         block = {
-            'index': None,
+            'index': len(self.chain),
             'timestamp': None,
             'transactions': None,
             'previous_hash': None
