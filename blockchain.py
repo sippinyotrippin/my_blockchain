@@ -12,7 +12,7 @@ class Blockchain:
         block = {
             'index': len(self.chain),
             'timestamp': datetime.utcnow().isoformat(),
-            'transactions': None,
+            'transactions': self.pending_transactions,
             'previous_hash': None
         }
         block['hash'] = self.hash(block) # hash method determines this block's hash and adds it to 'block'
