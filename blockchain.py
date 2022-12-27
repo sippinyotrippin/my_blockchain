@@ -7,13 +7,13 @@ class Blockchain:
         self.chain = []
         self.pending_transactions = []
 
-    def new_block(self):
+    def new_block(self, previous_hash=None):
     # Generates new block and adds to the chain (self.chain = [])
         block = {
             'index': len(self.chain),
             'timestamp': datetime.utcnow().isoformat(),
             'transactions': self.pending_transactions,
-            'previous_hash': None
+            'previous_hash': previous_hash
         }
         block['hash'] = self.hash(block) # hash method determines this block's hash and adds it to 'block'
 
