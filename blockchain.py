@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 
@@ -18,10 +19,13 @@ class Blockchain:
         block['hash'] = self.hash(block) # hash method determines this block's hash and adds it to 'block'
         self.pending_transactions = [] # purge (clean out) pending (незавершенные) transactions
         self.chain.append(block) # adds just generated block to the chain
+        print(f"Created block {block['index']}")
+        return block
+
     @staticmethod
     def hash(block):
     # Hashes a block
-        pass
+       pass
 
     def last_block(self):
     # Returns last block of the chain
