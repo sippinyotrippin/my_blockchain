@@ -25,7 +25,7 @@ class Blockchain:
     @staticmethod
     def hash(block):
     # Hashes a block
-       pass
+       block_string = json.dumps(block, sort_keys=True).encode()
 
     def last_block(self):
     # Returns last block of the chain
