@@ -1,6 +1,7 @@
 from json import dumps
 from datetime import datetime
 from hashlib import sha256
+from random import getrandbits
 
 
 class Blockchain:
@@ -19,7 +20,7 @@ class Blockchain:
             'timestamp': datetime.utcnow().isoformat(),
             'transactions': self.pending_transactions,
             'previous_hash': previous_hash,
-            'nonce': None
+            'nonce': getrandbits(64)  # one-time random number as essential source of random for blocks
         }
         block['hash'] = self.hash(block)  # hash method determines this block's hash and adds it to 'block'
         self.pending_transactions = []  # purge (clean out) pending (незавершенные) transactions
@@ -49,7 +50,12 @@ class Blockchain:
         })
 
     def proof_of_work(self):
-        pass
+        while True:
+            new_block = self.new_block()
+            if self.valid_hash(new_block):
+                break
+        self.chain.append(new_block)
+        print("Found a new block:", new_block)
 
     @staticmethod
     def valid_hash(block):
