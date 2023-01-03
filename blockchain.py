@@ -13,7 +13,7 @@ class Blockchain:
         # Creating new Blockchain object - creating new blockchain with genesis block
         self.new_block()
 
-    def new_block(self, previous_hash=None):
+    def new_block(self):
         # Generates new block and adds to the chain (self.chain = [])
         block = {
             'index': len(self.chain),
@@ -24,7 +24,7 @@ class Blockchain:
         }
         block['hash'] = self.hash(block)  # hash method determines this block's hash and adds it to 'block'
         self.pending_transactions = []  # purge (clean out) pending (незавершенные) transactions
-        self.chain.append(block)  # adds just generated block to the chain
+#        self.chain.append(block)  # adds just generated block to the chain
         print(f"Created block {block['index']}")
         return block
 
@@ -60,3 +60,9 @@ class Blockchain:
     @staticmethod
     def valid_hash(block):
         return block['hash'].startswith('0000')
+
+
+my = Blockchain()
+my.new_block()
+print(my.chain)
+print(my.chain[-1] == my.last_block())
