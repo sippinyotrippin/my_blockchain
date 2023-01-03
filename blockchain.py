@@ -19,7 +19,7 @@ class Blockchain:
             'index': len(self.chain),
             'timestamp': datetime.utcnow().isoformat(),
             'transactions': self.pending_transactions,
-            'previous_hash': previous_hash,
+            'previous_hash': self.last_block().get('hash') if self.last_block() == dict else None,
             'nonce': getrandbits(64)  # one-time random number as essential source of random for blocks
         }
         block['hash'] = self.hash(block)  # hash method determines this block's hash and adds it to 'block'
