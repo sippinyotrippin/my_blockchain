@@ -13,19 +13,24 @@ class Blockchain:
         # Creating new Blockchain object - creating new blockchain with genesis block
         self.new_block()
 
-    def new_block(self):
+    def last_block(self):
+        if self.chain:
+            return self.chain[-1]
+        else:
+            return None
+
+    def new_block(self, previous_hash=None):
         # Generates new block and adds to the chain (self.chain = [])
         block = {
             'index': len(self.chain),
             'timestamp': datetime.utcnow().isoformat(),
             'transactions': self.pending_transactions,
-            'previous_hash': self.last_block().get('hash') if self.last_block() == dict else None,
+            'previous_hash': None if self.last_block() is None else self.last_block()['hash'],
             'nonce': getrandbits(64)  # one-time random number as essential source of random for blocks
         }
         block['hash'] = self.hash(block)  # hash method determines this block's hash and adds it to 'block'
         self.pending_transactions = []  # purge (clean out) pending (незавершенные) transactions
-#        self.chain.append(block)  # adds just generated block to the chain
-        print(f"Created block {block['index']}")
+        self.chain.append(block)  # adds just generated block to the chain
         return block
 
     @staticmethod
@@ -34,13 +39,6 @@ class Blockchain:
         block_string = dumps(block, sort_keys=True).encode()
         # sort_keys=True means all keys of output dict will be sorted
         return sha256(block_string).hexdigest()
-
-    def last_block(self):
-        # Returns last block of the chain
-        if self.chain:
-            return self.chain[-1]
-        else:
-            return None
 
     def new_transaction(self, sender, recipient, amount):
         self.pending_transactions.append({
@@ -64,5 +62,7 @@ class Blockchain:
 
 my = Blockchain()
 my.new_block()
+my.new_block()
+my.new_block()
+my.new_block()
 print(my.chain)
-print(my.chain[-1] == my.last_block())
